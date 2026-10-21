@@ -170,3 +170,5 @@ footer i{font-family:var(--display);font-size:16px}
   filter:blur(10px)}
 .work .art.photo-art{overflow:hidden}
 .work .art.photo-art img{width:100%;height:100%;object-fit:cover;display:block}
+.cover.has-img{padding:0;overflow:hidden;background:var(--chip)}
+.cover.has-img img{width:100%;height:100%;object-fit:cover;display:block}

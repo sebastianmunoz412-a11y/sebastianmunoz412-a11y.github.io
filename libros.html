@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 <div class="satin" aria-hidden="true"></div>
@@ -49,51 +49,45 @@
   </div>
 </footer>
 
-<script src="common.js?v=7"></script>
+<script src="common.js?v=8"></script>
 <script>
 /* =========================================================
-   PARA AÑADIR UN LIBRO: copie uno de los bloques { ... },
-   péguelo al final de la lista y cambie los datos.
-   color = fondo de la portada, tinta = color del texto.
-   link = dónde comprarlo (opcional, déjelo "" si no hay).
+   Los libros se leen de la hoja de Google
+   "Libros del sitio el-padrecito.com" (cuenta personal).
+   Para añadir un libro, solo agregue una fila en esa hoja.
    ========================================================= */
-const BOOKS = [
-  { titulo:"Los cuatro amores", title:"The Four Loves", autor:"C. S. Lewis", tema:"Espiritualidad", theme:"Spirituality",
-    es:"Afecto, amistad, eros y caridad: una mirada lúcida a las formas del amor humano y a cómo la caridad las sana.",
-    en:"Affection, friendship, eros and charity: a lucid look at the forms of human love and how charity heals them.",
-    color:"#7a3b2e", tinta:"#f6e9e0", link:"" },
-  { titulo:"Cartas del diablo a su sobrino", title:"The Screwtape Letters", autor:"C. S. Lewis", tema:"Literatura", theme:"Literature",
-    es:"Un demonio veterano aconseja a su sobrino cómo perder un alma. Humor fino y una radiografía de la tentación.",
-    en:"A veteran demon advises his nephew on how to lose a soul. Sharp humor and an X-ray of temptation.",
-    color:"#1f2430", tinta:"#e6e0d6", link:"" },
-  { titulo:"La libertad interior", title:"Interior Freedom", autor:"Jacques Philippe", tema:"Espiritualidad", theme:"Spirituality",
-    es:"La verdadera libertad nace de la fe, la esperanza y el amor, aun cuando las circunstancias no cambian.",
-    en:"True freedom is born of faith, hope and love, even when circumstances do not change.",
-    color:"#dde3da", tinta:"#24302a", link:"" },
-  { titulo:"Castillo interior", title:"The Interior Castle", autor:"Santa Teresa de Jesús", tema:"Místicos", theme:"Mystics",
-    es:"El alma como un castillo de muchas moradas, y en la más íntima habita Dios. Un mapa de la vida de oración.",
-    en:"The soul as a castle of many mansions, with God dwelling in the innermost one. A map of the life of prayer.",
-    color:"#c9a77c", tinta:"#2a1d10", link:"" },
-  { titulo:"Noche oscura", title:"The Dark Night", autor:"San Juan de la Cruz", tema:"Místicos", theme:"Mystics",
-    es:"El camino del alma hacia la unión con Dios, a través de la purificación que la vacía de todo lo que no es Él.",
-    en:"The soul's path to union with God, through the purification that empties it of all that is not Him.",
-    color:"#2f3a2f", tinta:"#f1e9dc", link:"" }
-];
+const SHEET_ID = "12b6vitEHUczVqYSvxGOvb2GVtkXmPLxsuIWoCTOuQQU";
+const PALETTE = [["#7a3b2e","#f6e9e0"],["#1f2430","#e6e0d6"],["#dde3da","#24302a"],["#c9a77c","#2a1d10"],["#2f3a2f","#f1e9dc"],["#3b3047","#efe6f2"],["#e9dfd1","#3a2a1c"]];
 
-(function(){
+function parseCSV(t){const rows=[];let row=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];
+  if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=false}else f+=c}
+  else if(c=='"')q=true; else if(c==','){row.push(f);f=''} else if(c=='\n'){row.push(f);rows.push(row);row=[];f=''} else if(c!='\r')f+=c}
+  if(f||row.length){row.push(f);rows.push(row)} return rows}
+function imgURL(u){u=(u||'').trim(); if(!u) return '';
+  const m=u.match(/\/d\/([\w-]{20,})/)||u.match(/[?&]id=([\w-]{20,})/);
+  return (m && /google\.com/.test(u)) ? 'https://drive.google.com/thumbnail?id='+m[1]+'&sz=w800' : u}
+
+(async function(){
   const grid=document.getElementById('books'), fl=document.getElementById('filters');
-  let lang=document.documentElement.lang||'es', current='*';
-  function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+  let lang=document.documentElement.lang||'es', current='*', BOOKS=[];
+  grid.innerHTML='<p style="color:var(--muted)">…</p>';
+  try{
+    const r=await fetch('https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:csv&t='+Date.now());
+    const rows=parseCSV(await r.text()).slice(1).filter(x=>(x[0]||'').trim());
+    BOOKS=rows.map((x,i)=>({titulo:x[0],title:x[1],autor:x[2],tema:x[3]||'',theme:x[4],es:x[5],en:x[6],foto:imgURL(x[7]),link:(x[8]||'').trim(),color:PALETTE[i%PALETTE.length][0],tinta:PALETTE[i%PALETTE.length][1]}));
+  }catch(e){ grid.innerHTML='<p>No se pudieron cargar los libros. Intente de nuevo más tarde.</p>'; return; }
+  function esc(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
   function render(){
-    const themes=[...new Set(BOOKS.map(b=>b.tema))];
-    fl.innerHTML=[['*',lang==='es'?'Todos':'All']].concat(themes.map(t=>[t, lang==='es'?t:(BOOKS.find(b=>b.tema===t).theme||t)]))
+    const themes=[...new Set(BOOKS.map(b=>b.tema).filter(Boolean))];
+    fl.innerHTML=[['*',lang==='es'?'Todos':'All']].concat(themes.map(t=>[t, lang==='es'?t:((BOOKS.find(b=>b.tema===t)||{}).theme||t)]))
       .map(([k,l])=>`<button type="button" data-k="${esc(k)}" aria-pressed="${k===current}">${esc(l)}</button>`).join('');
     fl.querySelectorAll('button').forEach(b=>b.onclick=()=>{current=b.dataset.k;render()});
     grid.innerHTML=BOOKS.filter(b=>current==='*'||b.tema===current).map(b=>{
       const ti=lang==='es'?b.titulo:(b.title||b.titulo), tx=lang==='es'?b.es:(b.en||b.es), th=lang==='es'?b.tema:(b.theme||b.tema);
       const more=b.link?`<a class="more" href="${esc(b.link)}" target="_blank" rel="noopener">${lang==='es'?'Conseguir el libro':'Get the book'} →</a>`:'';
-      return `<article class="book"><div class="cover" style="background:${esc(b.color)};color:${esc(b.tinta)}"><span class="ct">${esc(ti)}</span><span class="ca">${esc(b.autor)}</span></div>
-        <span class="au">${esc(b.autor)} · ${esc(th)}</span><h3>${esc(ti)}</h3><p>${esc(tx)}</p>${more}</article>`;
+      const cover=b.foto?`<div class="cover has-img"><img src="${esc(b.foto)}" alt="${esc(ti)}" loading="lazy" referrerpolicy="no-referrer"></div>`
+        :`<div class="cover" style="background:${b.color};color:${b.tinta}"><span class="ct">${esc(ti)}</span><span class="ca">${esc(b.autor)}</span></div>`;
+      return `<article class="book">${cover}<span class="au">${esc(b.autor)}${th?' · '+esc(th):''}</span><h3>${esc(ti)}</h3><p>${esc(tx)}</p>${more}</article>`;
     }).join('');
   }
   document.addEventListener('langchange',e=>{lang=e.detail;render()});
