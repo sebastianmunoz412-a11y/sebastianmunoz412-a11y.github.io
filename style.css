@@ -172,3 +172,12 @@ footer i{font-family:var(--display);font-size:16px}
 .work .art.photo-art img{width:100%;height:100%;object-fit:cover;display:block}
 .cover.has-img{padding:0;overflow:hidden;background:var(--chip)}
 .cover.has-img img{width:100%;height:100%;object-fit:cover;display:block}
+/* retrato con texto girando */
+.hero-grid{display:grid;grid-template-columns:1fr auto;align-items:center;gap:48px;position:relative;z-index:1}
+.hero-text{min-width:0}
+.portrait{position:relative;width:clamp(220px,26vw,320px);aspect-ratio:1;max-width:100%}
+.portrait img{position:absolute;inset:16%;width:68%;height:68%;object-fit:cover;border-radius:50%;box-shadow:0 0 0 6px var(--bg),0 0 0 7px #c9a77c,0 24px 50px -24px rgba(40,25,10,.45)}
+.portrait .ring-text{position:absolute;inset:0;width:100%;height:100%;animation:ringspin 28s linear infinite;font:600 11px var(--body);letter-spacing:.5px;fill:var(--accent);overflow:visible}
+@keyframes ringspin{to{transform:rotate(360deg)}}
+@media (max-width:820px){.hero-grid{grid-template-columns:1fr;gap:28px}.portrait{order:-1;width:200px}}
+@media (prefers-reduced-motion:reduce){.portrait .ring-text{animation:none}}
