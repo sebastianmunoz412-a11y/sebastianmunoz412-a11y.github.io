@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Libros que han marcado al P. Sebastián.">
+<title>Libros recomendados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="satin" aria-hidden="true"></div>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">P. Sebastián</a>
+    <div class="navlinks">
+      <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a>
+      <a href="escuela-de-virtudes.html" data-es="Escuela de Virtudes" data-en="School of Virtues">Escuela de Virtudes</a>
+      <a href="libros.html" data-es="Libros" data-en="Books">Libros</a>
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" id="lang-es" aria-pressed="true">ES</button>
+        <button type="button" id="lang-en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <a class="back" href="index.html" data-es="← Volver al inicio" data-en="← Back home">← Volver al inicio</a>
+    <h1 data-es="Libros que me han <em>marcado</em>" data-en="Books that have <em>shaped</em> me">Libros que me han <em>marcado</em></h1>
+    <p data-es="Una pequeña biblioteca para el alma. Iré añadiendo los libros que recomiendo a quienes acompaño." data-en="A small library for the soul. I keep adding the books I recommend to the people I accompany.">Una pequeña biblioteca para el alma. Iré añadiendo los libros que recomiendo a quienes acompaño.</p>
+  </div>
+</header>
+
+<section class="block">
+  <div class="wrap">
+    <div class="filters" id="filters" role="group" aria-label="Filtrar"></div>
+    <div class="books" id="books"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 P. Sebastián Muñoz Chavarría</span>
+    <i>Ad maiorem Dei gloriam</i>
+  </div>
+</footer>
+
+<script src="common.js"></script>
+<script>
+/* =========================================================
+   PARA AÑADIR UN LIBRO: copie uno de los bloques { ... },
+   péguelo al final de la lista y cambie los datos.
+   color = fondo de la portada, tinta = color del texto.
+   link = dónde comprarlo (opcional, déjelo "" si no hay).
+   ========================================================= */
+const BOOKS = [
+  { titulo:"Los cuatro amores", title:"The Four Loves", autor:"C. S. Lewis", tema:"Espiritualidad", theme:"Spirituality",
+    es:"Afecto, amistad, eros y caridad: una mirada lúcida a las formas del amor humano y a cómo la caridad las sana.",
+    en:"Affection, friendship, eros and charity: a lucid look at the forms of human love and how charity heals them.",
+    color:"#7a3b2e", tinta:"#f6e9e0", link:"" },
+  { titulo:"Cartas del diablo a su sobrino", title:"The Screwtape Letters", autor:"C. S. Lewis", tema:"Literatura", theme:"Literature",
+    es:"Un demonio veterano aconseja a su sobrino cómo perder un alma. Humor fino y una radiografía de la tentación.",
+    en:"A veteran demon advises his nephew on how to lose a soul. Sharp humor and an X-ray of temptation.",
+    color:"#1f2430", tinta:"#e6e0d6", link:"" },
+  { titulo:"La libertad interior", title:"Interior Freedom", autor:"Jacques Philippe", tema:"Espiritualidad", theme:"Spirituality",
+    es:"La verdadera libertad nace de la fe, la esperanza y el amor, aun cuando las circunstancias no cambian.",
+    en:"True freedom is born of faith, hope and love, even when circumstances do not change.",
+    color:"#dde3da", tinta:"#24302a", link:"" },
+  { titulo:"Castillo interior", title:"The Interior Castle", autor:"Santa Teresa de Jesús", tema:"Místicos", theme:"Mystics",
+    es:"El alma como un castillo de muchas moradas, y en la más íntima habita Dios. Un mapa de la vida de oración.",
+    en:"The soul as a castle of many mansions, with God dwelling in the innermost one. A map of the life of prayer.",
+    color:"#c9a77c", tinta:"#2a1d10", link:"" },
+  { titulo:"Noche oscura", title:"The Dark Night", autor:"San Juan de la Cruz", tema:"Místicos", theme:"Mystics",
+    es:"El camino del alma hacia la unión con Dios, a través de la purificación que la vacía de todo lo que no es Él.",
+    en:"The soul's path to union with God, through the purification that empties it of all that is not Him.",
+    color:"#2f3a2f", tinta:"#f1e9dc", link:"" }
+];
+
+(function(){
+  const grid=document.getElementById('books'), fl=document.getElementById('filters');
+  let lang=document.documentElement.lang||'es', current='*';
+  function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+  function render(){
+    const themes=[...new Set(BOOKS.map(b=>b.tema))];
+    fl.innerHTML=[['*',lang==='es'?'Todos':'All']].concat(themes.map(t=>[t, lang==='es'?t:(BOOKS.find(b=>b.tema===t).theme||t)]))
+      .map(([k,l])=>`<button type="button" data-k="${esc(k)}" aria-pressed="${k===current}">${esc(l)}</button>`).join('');
+    fl.querySelectorAll('button').forEach(b=>b.onclick=()=>{current=b.dataset.k;render()});
+    grid.innerHTML=BOOKS.filter(b=>current==='*'||b.tema===current).map(b=>{
+      const ti=lang==='es'?b.titulo:(b.title||b.titulo), tx=lang==='es'?b.es:(b.en||b.es), th=lang==='es'?b.tema:(b.theme||b.tema);
+      const more=b.link?`<a class="more" href="${esc(b.link)}" target="_blank" rel="noopener">${lang==='es'?'Conseguir el libro':'Get the book'} →</a>`:'';
+      return `<article class="book"><div class="cover" style="background:${esc(b.color)};color:${esc(b.tinta)}"><span class="ct">${esc(ti)}</span><span class="ca">${esc(b.autor)}</span></div>
+        <span class="au">${esc(b.autor)} · ${esc(th)}</span><h3>${esc(ti)}</h3><p>${esc(tx)}</p>${more}</article>`;
+    }).join('');
+  }
+  document.addEventListener('langchange',e=>{lang=e.detail;render()});
+  render();
+})();
+</script>
+</body>
+</html>
