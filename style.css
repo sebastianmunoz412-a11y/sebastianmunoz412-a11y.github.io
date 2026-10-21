@@ -161,3 +161,10 @@ footer i{font-family:var(--display);font-size:16px}
 @media (max-width:900px){.cards,.steps{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.cards,.steps{grid-template-columns:1fr}.page-hero{padding-block:44px}}
 @media (prefers-reduced-motion:reduce){.cover{transition:none}.book:hover .cover{transform:none}}
+
+/* saludo: línea inferior */
+.hero h1 .tagline{display:block;font-style:italic;font-size:.42em;line-height:1.1;letter-spacing:-.01em;color:var(--muted);margin-top:.45em}
+/* rayos de luz en la portada */
+.hero::before{content:"";position:absolute;inset:-20% -10% -10% 20%;pointer-events:none;z-index:0;
+  background:conic-gradient(from 160deg at 85% -20%,transparent 0deg,rgba(255,255,255,.8) 6deg,transparent 12deg,transparent 18deg,rgba(255,255,255,.65) 22deg,transparent 28deg,transparent 36deg,rgba(255,255,255,.75) 41deg,transparent 47deg);
+  filter:blur(10px)}
