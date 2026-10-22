@@ -198,3 +198,11 @@ footer i{font-family:var(--display);font-size:16px}
 .sd-pill{width:fit-content}
 .sd-pill:has(i:empty){align-items:center;border-radius:999px;padding:6px 22px 6px 6px}
 .sd-pill:has(i:empty) .t{padding-top:0}
+
+/* animaciones al bajar */
+.anim-on .rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.anim-on .rv.in{opacity:1;transform:none}
+.hero h1,.hero p,.hero .ctas,.portrait{animation:heroIn 1s cubic-bezier(.2,.7,.2,1) both}
+.hero p{animation-delay:.12s}.hero .ctas{animation-delay:.22s}.portrait{animation-delay:.3s}
+@keyframes heroIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.hero h1,.hero p,.hero .ctas,.portrait{animation:none}}
