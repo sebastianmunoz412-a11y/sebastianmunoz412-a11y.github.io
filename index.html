@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="style.css?v=11">
 
 </head>
 <body>
@@ -42,6 +42,7 @@
       <a class="btn primary" href="#trabajo"><span data-es="Encuéntrame" data-en="Find me">Encuéntrame</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       <a class="btn" href="#contacto"><span data-es="Escríbame" data-en="Get in touch">Escríbame</span></a>
     </div>
+      <div class="sd-pill" id="santo" hidden><span class="d" id="santo-d"></span><span class="t"><span class="n"><span id="santo-hoy">Hoy,</span> <b id="santo-n"></b></span><i id="santo-q"></i><small id="santo-r"></small></span></div>
     </div>
     <div class="portrait" aria-hidden="false">
       <img src="retrato.jpg" alt="P. Sebastián Muñoz Chavarría junto a un vitral" width="520" height="520">
@@ -234,5 +235,26 @@
 })();
 </script>
 
+<script>
+(async function(){
+  const box=document.getElementById('santo'); if(!box) return;
+  function parseCSV(t){const rows=[];let row=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=false}else f+=c}else if(c=='"')q=true;else if(c==','){row.push(f);f=''}else if(c=='\n'){row.push(f);rows.push(row);row=[];f=''}else if(c!='\r')f+=c}if(f||row.length){row.push(f);rows.push(row)}return rows}
+  try{
+    const r=await fetch('https://docs.google.com/spreadsheets/d/12b6vitEHUczVqYSvxGOvb2GVtkXmPLxsuIWoCTOuQQU/gviz/tq?tqx=out:csv&gid=1437546478&t='+Date.now());
+    const now=new Date(), M=now.getMonth()+1, D=now.getDate();
+    const row=parseCSV(await r.text()).slice(1).find(x=>+x[0]===M && +x[1]===D);
+    if(!row||!(row[2]||'').trim()) return;
+    document.getElementById('santo-d').textContent=D;
+    document.getElementById('santo-n').textContent=row[2].trim();
+    const q=(row[3]||'').trim(), ref=(row[4]||'').trim();
+    document.getElementById('santo-q').textContent=q?'«'+q+'»':'';
+    document.getElementById('santo-r').textContent=(q&&ref&&ref!==row[2].trim())?'— '+ref:'';
+    const setL=l=>{document.getElementById('santo-hoy').textContent=l==='en'?'Today,':'Hoy,'};
+    setL(document.documentElement.lang); document.addEventListener('langchange',e=>setL(e.detail));
+    document.getElementById('lang-es').addEventListener('click',()=>setL('es'));document.getElementById('lang-en').addEventListener('click',()=>setL('en'));
+    box.hidden=false;
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
