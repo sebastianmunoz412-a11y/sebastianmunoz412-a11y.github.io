@@ -26,7 +26,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="style.css?v=14">
+<script src="liturgia.js?v=1"></script>
+<link rel="stylesheet" href="style.css?v=15">
 
 </head>
 <body>
@@ -38,6 +39,7 @@
       <a href="#trabajo" data-es="Encuéntrame" data-en="Find me">Encuéntrame</a>
       <a href="#sobre" data-es="Sobre mí" data-en="About">Sobre mí</a>
       <a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a>
+      <a href="orar.html" data-es="Orar" data-en="Pray">Orar</a>
       <a class="ig" href="https://www.instagram.com/elpadrecito.co/" target="_blank" rel="noopener" aria-label="Instagram @elpadrecito.co" title="@elpadrecito.co"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
       <div class="lang" role="group" aria-label="Idioma / Language">
         <button type="button" id="lang-es" aria-pressed="true">ES</button>
@@ -74,6 +76,10 @@
   </div>
   <div class="gallery" id="gallery" tabindex="0" aria-label="Galería de proyectos">
     <div class="track" id="track">
+      <a class="work" data-link="rezar" href="orar.html">
+        <div class="art" style="background:#4f6b45;color:#eef1e8"><span><i>Orar</i></span></div>
+        <div class="meta"><span class="kind" data-es="Oración" data-en="Prayer">Oración</span><span class="title" data-es="Un rato para orar" data-en="A moment to pray">Un rato para orar</span><span class="desc" data-es="Adoración, Rosario, una palabra de la Escritura, examen de conciencia y dónde adorar o confesarse." data-en="Adoration, the Rosary, a word from Scripture, an examination of conscience and where to adore or go to confession.">Adoración, Rosario, una palabra de la Escritura, examen de conciencia y dónde adorar o confesarse.</span></div>
+      </a>
       <a class="work" data-link="spotify" href="#contacto" target="_blank" rel="noopener">
         <div class="art photo-art" style="background:#ff9049"><img src="santo-remedio.jpg" alt="Santo Remedio" loading="lazy"></div>
         <div class="meta"><span class="kind" data-es="Podcast" data-en="Podcast">Podcast</span><span class="title">Santo Remedio</span><span class="desc" data-es="Mi podcast en español. Escúchalo en Spotify." data-en="My Spanish-language podcast. Listen on Spotify.">Mi podcast en español. Escúchalo en Spotify.</span></div>
@@ -207,7 +213,7 @@
   const LINKS={
     spotify:"https://open.spotify.com/show/6tqSqzJqAPryxEpeXzeEpU",
     cathopic:"https://cathopic.com/@sebastianmunoz412",
-    medium:"https://medium.com/@sebastianmunoz412", patreon:"https://www.patreon.com/c/elpadrecito", paulable:"https://paulable.com/@sebastian", virtudes:"escuela-de-virtudes.html", libros:"libros.html"
+    medium:"https://medium.com/@sebastianmunoz412", patreon:"https://www.patreon.com/c/elpadrecito", paulable:"https://paulable.com/@sebastian", virtudes:"escuela-de-virtudes.html", rezar:"orar.html", libros:"libros.html"
   };
   document.querySelectorAll('[data-link]').forEach(a=>{
     const u=LINKS[a.dataset.link];

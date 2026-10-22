@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Adore al Santísimo, rece el Rosario paso a paso, reciba una palabra de la Escritura, prepare su confesión y encuentre dónde hay Hora Santa.">
+<link rel="canonical" href="https://www.el-padrecito.com/orar.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="El Padrecito">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Un rato para orar · P. Sebastián">
+<meta property="og:description" content="Rece el Rosario paso a paso, reciba una palabra de la Escritura y prepare su confesión.">
+<meta property="og:url" content="https://www.el-padrecito.com/orar.html">
+<meta property="og:image" content="https://www.el-padrecito.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Un rato para orar · P. Sebastián">
+<meta name="twitter:description" content="Rece el Rosario paso a paso, reciba una palabra de la Escritura y prepare su confesión.">
+<meta name="twitter:image" content="https://www.el-padrecito.com/og.jpg">
+<title>Un rato para orar · P. Sebastián</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600&display=swap">
+<script src="liturgia.js?v=1"></script>
+<link rel="stylesheet" href="style.css?v=15">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="orar.css?v=3">
+</head>
+<body class="orar">
+<div class="satin" aria-hidden="true"></div>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">P. Sebastián</a>
+    <div class="navlinks">
+      <a href="index.html" data-es="Inicio" data-en="Home">Inicio</a>
+      <a href="escuela-de-virtudes.html" data-es="Escuela de Virtudes" data-en="School of Virtues">Escuela de Virtudes</a>
+      <a href="libros.html" data-es="Libros" data-en="Books">Libros</a>
+      <a href="orar.html" data-es="Orar" data-en="Pray">Orar</a>
+      <a class="ig" href="https://www.instagram.com/elpadrecito.co/" target="_blank" rel="noopener" aria-label="Instagram @elpadrecito.co" title="@elpadrecito.co"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" id="lang-es" aria-pressed="true">ES</button>
+        <button type="button" id="lang-en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="o">
+<!-- ===== HERO ===== -->
+<header class="o-hero">
+  <div class="o-blobs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <span class="o-badge"><span class="o-cross" aria-hidden="true"></span><span data-es="Un rato para orar" data-en="A moment to pray">Un rato para orar</span></span>
+    <h1 data-es="Deténgase un rato <em>con Jesús.</em>" data-en="Stay a while <em>with Jesus.</em>">Deténgase un rato <em>con Jesús.</em></h1>
+    <p class="o-lead" data-es="Adore al Santísimo, reciba una palabra, rece el Rosario o prepare su confesión. Todo en un solo lugar, a su ritmo." data-en="Adore the Blessed Sacrament, receive a word, pray the Rosary or prepare for confession. All in one place, at your own pace.">Adore al Santísimo, reciba una palabra, rece el Rosario o prepare su confesión. Todo en un solo lugar, a su ritmo.</p>
+    <a class="o-ask" href="#una-palabra" id="o-ask">
+      <span class="o-ask-t"><span class="o-ask-p" data-es="Hoy necesito" data-en="Today I need">Hoy necesito</span> <span id="o-type"></span><span class="o-caret"></span></span>
+      <span class="o-go" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span>
+    </a>
+    <div class="o-chips">
+      <a href="#una-palabra"><span class="ic">✦</span><span data-es="Una palabra" data-en="A word">Una palabra</span></a>
+      <a href="#adoracion"><span class="ic">☀</span><span data-es="Adorar" data-en="Adore">Adorar</span></a>
+      <a href="#donde"><span class="ic">⌖</span><span data-es="Dónde adorar o confesarme" data-en="Where to adore or confess">Dónde adorar o confesarme</span></a>
+      <a href="#rosario-sec"><span class="ic">◌</span><span data-es="Rosario" data-en="Rosary">Rosario</span></a>
+      <a href="#examen"><span class="ic">✓</span><span data-es="Confesarme" data-en="Go to confession">Confesarme</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== UNA PALABRA ===== -->
+<section class="o-sec" id="una-palabra">
+  <div class="wrap o-split">
+    <div class="o-copy">
+      <p class="o-kicker" data-es="Una palabra para ti" data-en="A word for you">Una palabra para ti</p>
+      <h2 class="o-rv" data-es="Haga silencio. <em>Dios habla.</em>" data-en="Be still. <em>God speaks.</em>">Haga silencio. <em>Dios habla.</em></h2>
+      <p data-es="Pídale luz al Espíritu Santo y abra la Escritura. Reciba un versículo para llevar con usted hoy y compártalo con quien lo necesite." data-en="Ask the Holy Spirit for light and open Scripture. Receive a verse to carry with you today and share it with someone who needs it.">Pídale luz al Espíritu Santo y abra la Escritura. Reciba un versículo para llevar con usted hoy y compártalo con quien lo necesite.</p>
+      <div class="ctas"><button class="btn primary" id="pv-btn" type="button"><span data-es="Recibir una palabra" data-en="Receive a word">Recibir una palabra</span></button><button class="btn" id="pv-copy" type="button"><span data-es="Compartir" data-en="Share">Compartir</span></button><span class="toast" id="pv-toast" aria-live="polite"></span></div>
+    </div>
+    <div class="o-phone-wrap">
+      <div class="o-phone">
+        <div class="o-screen pv" id="palabra">
+          <span class="o-cross sm" aria-hidden="true"></span>
+          <p class="o-screen-h" data-es="Una palabra<br>para ti" data-en="A word<br>for you">Una palabra<br>para ti</p>
+          <div class="pv-card">
+            <p class="pv-hint" data-es="Pulse «Recibir una palabra»." data-en="Press “Receive a word”.">Pulse «Recibir una palabra».</p>
+            <blockquote class="pv-q"></blockquote>
+            <cite class="pv-r"></cite>
+          </div>
+          <div class="o-screen-foot"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <p class="o-note" data-es="Texto bíblico según la traducción litúrgica." data-en="Scripture from liturgical translations.">Texto bíblico según la traducción litúrgica.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ADORACIÓN ===== -->
+<section class="o-sec o-tint" id="adoracion">
+  <div class="o-blobs soft" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <div class="o-center">
+      <p class="o-kicker" data-es="Adoración al Santísimo" data-en="Eucharistic Adoration">Adoración al Santísimo</p>
+      <h2 class="o-rv" data-es="Él está aquí. <em>Adorémosle.</em>" data-en="He is here. <em>Let us adore Him.</em>">Él está aquí. <em>Adorémosle.</em></h2>
+      <p data-es="Si no puede ir a una capilla, acompáñelo desde aquí en silencio y oración." data-en="If you cannot go to a chapel, keep Him company from here in silence and prayer.">Si no puede ir a una capilla, acompáñelo desde aquí en silencio y oración.</p>
+    </div>
+    <div class="o-ad">
+      <div class="o-card o-live-card">
+        <button class="o-live" id="ad-live" type="button" aria-label="Ver la adoración en vivo">
+          <img src="tabernaculo.jpg" alt="" loading="lazy">
+          <span class="o-live-tag"><i></i><span data-es="En vivo · 24 horas" data-en="Live · 24 hours">En vivo · 24 horas</span></span>
+          <span class="o-play"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span data-es="Entrar a la capilla" data-en="Enter the chapel">Entrar a la capilla</span></span>
+        </button>
+        <div class="o-card-b">
+          <h3 data-es="Capilla en vivo" data-en="Live chapel">Capilla en vivo</h3>
+          <p data-es="Adoración perpetua transmitida las 24 horas desde la iglesia de Our Lady of Sorrows (Birmingham, Alabama). ¿No carga? <a href=&quot;https://www.youtube.com/watch?v=am72_e-h9d8&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Ábrala en YouTube</a>." data-en="Perpetual adoration streamed 24 hours a day from Our Lady of Sorrows Church (Birmingham, Alabama). Not loading? <a href=&quot;https://www.youtube.com/watch?v=am72_e-h9d8&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Open it on YouTube</a>.">Adoración perpetua transmitida las 24 horas desde la iglesia de Our Lady of Sorrows (Birmingham, Alabama). ¿No carga? <a href="https://www.youtube.com/watch?v=am72_e-h9d8" target="_blank" rel="noopener">Ábrala en YouTube</a>.</p>
+        </div>
+      </div>
+      <div class="o-card o-timer" id="ad-timer">
+        <div class="o-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" class="tr"/><circle cx="60" cy="60" r="52" class="tp" id="t-ring"/></svg><span id="t-clock">15:00</span></div>
+        <h3 data-es="Un rato de silencio" data-en="A time of silence">Un rato de silencio</h3>
+        <p data-es="Elija cuánto tiempo quiere quedarse. Al terminar sonará una campana suave." data-en="Choose how long you want to stay. A soft bell will ring at the end.">Elija cuánto tiempo quiere quedarse. Al terminar sonará una campana suave.</p>
+        <div class="t-min" role="group" aria-label="Minutos"><button type="button" data-m="5" aria-pressed="false">5 min</button><button type="button" data-m="15" aria-pressed="true">15 min</button><button type="button" data-m="30" aria-pressed="false">30 min</button><button type="button" data-m="60" aria-pressed="false" data-es="1 hora" data-en="1 hour">1 hora</button></div>
+        <div class="t-act"><button class="btn primary" id="t-go" type="button"><span>Comenzar</span></button><button class="btn" id="t-stop" type="button"><span data-es="Reiniciar" data-en="Reset">Reiniciar</span></button></div>
+        <p class="t-msg" id="t-msg" aria-live="polite"></p>
+      </div>
+      <div class="o-card o-prayers">
+        <div class="ad-tabs" role="group" aria-label="Oraciones">
+          <button type="button" data-p="visita" data-es="Visita" data-en="Visit">Visita</button>
+          <button type="button" data-p="fatima" data-es="Ángel de Fátima" data-en="Angel of Fatima">Ángel de Fátima</button>
+          <button type="button" data-p="anima" data-es="Alma de Cristo" data-en="Anima Christi">Alma de Cristo</button>
+          <button type="button" data-p="espiritual" data-es="Comunión espiritual" data-en="Spiritual communion">Comunión espiritual</button>
+          <button type="button" data-p="tantum" data-es="Tantum ergo" data-en="Tantum ergo">Tantum ergo</button>
+        </div>
+        <p class="ad-text" id="ad-text"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DÓNDE ADORAR ===== -->
+<section class="o-sec" id="donde">
+  <div class="wrap">
+    <div class="o-center">
+      <p class="o-kicker" data-es="Dónde adorar y confesarse" data-en="Where to adore and confess">Dónde adorar y confesarse</p>
+      <h2 class="o-rv" data-es="Adoración y Confesiones <em>cerca de usted.</em>" data-en="Adoration and Confession <em>near you.</em>">Adoración y Confesiones <em>cerca de usted.</em></h2>
+      <p data-es="Parroquias del norte de New Jersey con Hora Santa, adoración al Santísimo y confesiones. Toque un lugar para verlo en el mapa y saber cómo llegar." data-en="Parishes in northern New Jersey with Holy Hour, Eucharistic adoration and confession. Tap a place to see it on the map and get directions.">Parroquias del norte de New Jersey con Hora Santa, adoración al Santísimo y confesiones. Toque un lugar para verlo en el mapa y saber cómo llegar.</p>
+    </div>
+    <div class="ad-f" role="group" aria-label="Filtro">
+      <button type="button" data-f="all" aria-pressed="true" data-es="Todos" data-en="All">Todos</button>
+      <button type="button" data-f="hs" aria-pressed="false"><i class="ad-dot hs"></i><span data-es="Hora Santa" data-en="Holy Hour">Hora Santa</span></button>
+      <button type="button" data-f="ad" aria-pressed="false"><i class="ad-dot ad"></i><span data-es="Adoración" data-en="Adoration">Adoración</span></button>
+      <button type="button" data-f="pp" aria-pressed="false"><i class="ad-dot pp"></i><span data-es="Perpetua" data-en="Perpetual">Perpetua</span></button>
+      <button type="button" data-f="cf" aria-pressed="false"><i class="ad-dot cf"></i><span data-es="Confesiones" data-en="Confession">Confesiones</span></button>
+      <button type="button" id="ad-near" class="near" aria-pressed="false"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg><span data-es="Cerca de mí" data-en="Near me">Cerca de mí</span></button>
+    </div>
+    <div class="o-card ad-box">
+      <div id="ad-map" class="ad-map" role="region" aria-label="Mapa"></div>
+      <div class="ad-side">
+        <p class="ad-count" id="ad-count"></p>
+        <div class="ad-list" id="ad-list"></div>
+      </div>
+    </div>
+    <div class="o-mt"><span class="o-mt-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.8 3.9 6 3.9 9.5s-1.3 6.7-3.9 9.5c-2.6-2.8-3.9-6-3.9-9.5s1.3-6.7 3.9-9.5z"/></svg></span><p data-es="¿Está en otra parte del mundo? Busque Misas, adoración y confesiones cerca de usted en <a href=&quot;https://masstimes.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>MassTimes.org</a>." data-en="Somewhere else in the world? Find Masses, adoration and confession near you at <a href=&quot;https://masstimes.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>MassTimes.org</a>.">¿Está en otra parte del mundo? Busque Misas, adoración y confesiones cerca de usted en <a href="https://masstimes.org/" target="_blank" rel="noopener">MassTimes.org</a>.</p></div>
+    <p class="o-note c" data-es="Los horarios pueden cambiar en fiestas y vacaciones: confírmelos con la parroquia antes de ir." data-en="Schedules may change on feasts and holidays: please confirm with the parish before going.">Los horarios pueden cambiar en fiestas y vacaciones: confírmelos con la parroquia antes de ir.</p>
+  </div>
+</section>
+
+<!-- ===== ROSARIO ===== -->
+<section class="o-sec o-tint b" id="rosario-sec">
+  <div class="o-blobs soft" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <div class="o-center">
+      <p class="o-kicker" data-es="Santo Rosario" data-en="Holy Rosary">Santo Rosario</p>
+      <h2 class="o-rv" data-es="Contemplar el rostro de Cristo <em>con María.</em>" data-en="Contemplating the face of Christ <em>with Mary.</em>">Contemplar el rostro de Cristo <em>con María.</em></h2>
+      <p data-es="Los misterios del día aparecen solos. Avance con el botón o con las flechas del teclado." data-en="Today’s mysteries appear on their own. Move forward with the button or the arrow keys.">Los misterios del día aparecen solos. Avance con el botón o con las flechas del teclado.</p>
+    </div>
+    <div class="r-sets" role="group" aria-label="Misterios">
+      <button type="button" data-set="gozosos" data-es="Gozosos" data-en="Joyful">Gozosos</button>
+      <button type="button" data-set="luminosos" data-es="Luminosos" data-en="Luminous">Luminosos</button>
+      <button type="button" data-set="dolorosos" data-es="Dolorosos" data-en="Sorrowful">Dolorosos</button>
+      <button type="button" data-set="gloriosos" data-es="Gloriosos" data-en="Glorious">Gloriosos</button>
+    </div>
+    <div class="rosario o-card" id="rosario" tabindex="0">
+      <svg id="beads" viewBox="0 0 400 420" aria-hidden="true"></svg>
+      <div class="r-panel">
+        <div class="r-head"><span id="r-set"></span><span id="r-day"></span></div>
+        <h3 id="r-title"></h3>
+        <p id="r-sub" class="r-sub"></p>
+        <p id="r-text" class="r-text" aria-live="polite"></p>
+        <div class="r-bar"><span id="r-prog"></span></div>
+        <div class="r-nav"><button class="btn" id="r-prev" type="button">←</button><button class="btn primary" id="r-next" type="button"></button><small id="r-count"></small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXAMEN ===== -->
+<section class="o-sec" id="examen">
+  <div class="wrap o-tl">
+    <div class="o-tl-h">
+      <p class="o-kicker" data-es="Examen de conciencia" data-en="Examination of conscience">Examen de conciencia</p>
+      <h2 class="o-rv" data-es="Mire su vida <em>con los ojos de Dios.</em>" data-en="Look at your life <em>through God’s eyes.</em>">Mire su vida <em>con los ojos de Dios.</em></h2>
+      <p data-es="Lea con calma cada pregunta a la luz de los Mandamientos y marque las que quiera recordar al confesarse. <b>Nada se guarda ni se envía</b>: al cerrar la página, todo se borra." data-en="Read each question calmly in the light of the Commandments and check those you want to remember at confession. <b>Nothing is saved or sent</b>: when you close the page, it is all erased.">Lea con calma cada pregunta a la luz de los Mandamientos y marque las que quiera recordar al confesarse. <b>Nada se guarda ni se envía</b>: al cerrar la página, todo se borra.</p>
+      <button class="btn" id="x-clear" type="button"><span data-es="Borrar todo" data-en="Clear all">Borrar todo</span></button>
+    </div>
+    <div class="x-list" id="examen-list"></div>
+  </div>
+</section>
+
+<!-- ===== ACTO DE CONTRICIÓN ===== -->
+<section class="o-sec o-end" id="contricion">
+  <div class="o-blobs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <div class="o-center">
+      <h2 class="o-rv big" data-es="Vuelva a casa. <em>Dios Padre le abraza.</em>" data-en="Come home. <em>God the Father embraces you.</em>">Vuelva a casa. <em>Dios Padre le abraza.</em></h2>
+    </div>
+    <div class="o-card x-act2">
+      <p class="o-kicker" data-es="Acto de contrición" data-en="Act of contrition">Acto de contrición</p>
+      <div class="ac-tabs" role="group" aria-label="Fórmulas"><button type="button" data-a="0" aria-pressed="true" data-es="Señor mío Jesucristo" data-en="Rite of Penance">Señor mío Jesucristo</button><button type="button" data-a="1" aria-pressed="false" data-es="Dios mío, me arrepiento" data-en="Traditional">Dios mío, me arrepiento</button></div>
+      <p class="x-pray" id="ac-text"></p>
+      <ul class="o-checks">
+        <li data-es="Examine su conciencia" data-en="Examine your conscience">Examine su conciencia</li>
+        <li data-es="Arrepiéntase de corazón" data-en="Be sorry from the heart">Arrepiéntase de corazón</li>
+        <li data-es="Confiese sus pecados al sacerdote" data-en="Confess your sins to the priest">Confiese sus pecados al sacerdote</li>
+        <li data-es="Cumpla la penitencia" data-en="Do your penance">Cumpla la penitencia</li>
+      </ul>
+      <div class="x-cta"><a class="btn primary" href="#donde" id="go-conf" data-es="Buscar dónde confesarme" data-en="Find where to go to confession">Buscar dónde confesarme</a><a class="btn" href="#examen" data-es="Volver al examen" data-en="Back to the examination">Volver al examen</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 P. Sebastián</span>
+  </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="common.js?v=8"></script>
+<script src="rezar.js?v=3"></script>
+<script src="adoracion.js?v=3"></script>
+<script src="orar-fx.js?v=2"></script>
+<script src="anim.js?v=1" defer></script>
+</body>
+</html>
