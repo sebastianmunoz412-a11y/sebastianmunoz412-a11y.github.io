@@ -28,7 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600&display=swap">
 <script src="liturgia.js?v=1"></script>
-<link rel="stylesheet" href="style.css?v=15">
+<link rel="stylesheet" href="style.css?v=17">
 
 </head>
 <body>
@@ -181,11 +181,21 @@
     <p class="label" data-es="Contacto" data-en="Get in touch">Contacto</p>
     <h2 data-es="Hablemos de lo que Dios está haciendo en su vida" data-en="Let's talk about what God is doing in your life">Hablemos de lo que Dios está haciendo en su vida</h2>
     <p data-es="Escríbame." data-en="Write to me.">Escríbame.</p>
-    <div class="mail">
-      <code id="email">correo@ejemplo.com</code>
-      <button class="btn primary" type="button" id="copy"><span data-es="Copiar correo" data-en="Copy email">Copiar correo</span></button>
-      <span class="toast" id="toast" aria-live="polite"></span>
-    </div>
+    <form class="cform" id="cform" action="https://api.web3forms.com/submit" method="POST" novalidate>
+      <input type="hidden" name="access_key" value="c28b8f9b-1e50-4d02-96b4-b2c5b56c30ce">
+      <input type="hidden" name="subject" value="Nuevo mensaje desde el-padrecito.com">
+      <input type="hidden" name="from_name" value="el-padrecito.com">
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="cf-row">
+        <label><span data-es="Nombre" data-en="Name">Nombre</span><input type="text" name="name" required autocomplete="name" maxlength="120"></label>
+        <label><span data-es="Correo electrónico" data-en="Email">Correo electrónico</span><input type="email" name="email" required autocomplete="email" maxlength="160"></label>
+      </div>
+      <label><span data-es="Mensaje" data-en="Message">Mensaje</span><textarea name="message" rows="6" required maxlength="5000"></textarea></label>
+      <div class="cf-act">
+        <button class="btn primary" type="submit" id="cf-send"><span data-es="Enviar mensaje" data-en="Send message">Enviar mensaje</span></button>
+        <span class="toast" id="cf-msg" aria-live="polite"></span>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -243,17 +253,21 @@
   g.addEventListener('click',e=>{if(moved){e.preventDefault();moved=false}},true);
   t.querySelectorAll('a,img').forEach(a=>a.setAttribute('draggable','false'));
 
-  // copy email
-  const toast=document.getElementById('toast');
-  document.getElementById('copy').onclick=function(){
-    const txt=document.getElementById('email').textContent;
-    const es=document.documentElement.lang==='es';
-    navigator.clipboard.writeText(txt).then(()=>{toast.textContent=es?'Copiado':'Copied'}).catch(()=>{
-      const r=document.createRange(); r.selectNodeContents(document.getElementById('email'));
-      const s=getSelection(); s.removeAllRanges(); s.addRange(r);
-      toast.textContent=es?'Seleccionado: copie con Ctrl+C':'Selected: copy with Ctrl+C';
-    });
-  };
+  // contact form (Web3Forms)
+  const cf=document.getElementById('cform');
+  if(cf){cf.addEventListener('submit',async function(e){
+    e.preventDefault();
+    const es=document.documentElement.lang!=='en', msg=document.getElementById('cf-msg'), btn=document.getElementById('cf-send');
+    if(!cf.checkValidity()){cf.reportValidity();return}
+    btn.disabled=true; msg.className='toast'; msg.textContent=es?'Enviando…':'Sending…';
+    try{
+      const r=await fetch(cf.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(cf)});
+      const d=await r.json();
+      if(r.ok&&d.success){cf.reset();msg.className='toast ok';msg.textContent=es?'¡Gracias! Su mensaje fue enviado. Le responderé pronto.':'Thank you! Your message was sent. I will reply soon.'}
+      else throw 0;
+    }catch(err){msg.className='toast err';msg.textContent=es?'No se pudo enviar. Inténtelo de nuevo en un momento.':'It could not be sent. Please try again in a moment.'}
+    btn.disabled=false;
+  })}
 })();
 </script>
 

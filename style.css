@@ -271,3 +271,15 @@ footer .wrap{align-items:center}
 .tiempo i{width:10px;height:10px;border-radius:50%;display:inline-block;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
 @media (max-width:900px){.rosario{grid-template-columns:1fr;padding:24px}#beads{max-width:300px;margin:0 auto}.x-list{grid-template-columns:1fr}}
 @media (max-width:600px){.o .r-head span+span::before{display:none}.o .r-head{flex-direction:column;align-items:flex-start;gap:2px}}
+
+.cform{display:grid;gap:16px;max-width:720px}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cform label{display:grid;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted)}
+.cform input,.cform textarea{font:400 16px var(--body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;width:100%;box-sizing:border-box;transition:border-color .2s,box-shadow .2s}
+.cform textarea{resize:vertical;min-height:150px}
+.cform input:focus,.cform textarea:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 15%,transparent)}
+.cf-act{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.cf-act .btn:disabled{opacity:.6;cursor:default}
+.cform .hp{display:none}
+.toast.ok{color:var(--accent)}.toast.err{color:#a33}
+@media (max-width:640px){.cf-row{grid-template-columns:1fr}}
