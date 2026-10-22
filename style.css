@@ -195,3 +195,6 @@ footer i{font-family:var(--display);font-size:16px}
 .sd-pill i{font-family:var(--display);font-size:18px;line-height:1.3;color:var(--ink)}
 .sd-pill i:empty,.sd-pill small:empty{display:none}
 .sd-pill small{font-size:12px;letter-spacing:.04em;color:var(--accent);font-weight:600}
+.sd-pill{width:fit-content}
+.sd-pill:has(i:empty){align-items:center;border-radius:999px;padding:6px 22px 6px 6px}
+.sd-pill:has(i:empty) .t{padding-top:0}
