@@ -182,7 +182,7 @@ var rb=document.getElementById('rosario');
 if(rb){
   var set=byDay[new Date().getDay()], steps=[], idx=0;
   function build(){
-    steps=[{p:'cruz',b:-1},{p:'credo',b:0},{p:'padre',b:1},{p:'ave',b:2},{p:'ave',b:3},{p:'ave',b:4},{p:'gloria',b:-2}];
+    steps=[{p:'cruz',b:0},{p:'credo',b:0},{p:'padre',b:1},{p:'ave',b:2},{p:'ave',b:3},{p:'ave',b:4},{p:'gloria',b:-2}];
     var bead=5;
     for(var d=0;d<5;d++){
       steps.push({p:'misterio',d:d,b:bead}); steps.push({p:'padre',b:bead,d:d}); bead++;
@@ -194,14 +194,25 @@ if(rb){
   /* cuentas: 0 cruz/credo, 1 padre, 2-4 aves, luego 5 décadas (1 padre + 10 aves = 11) */
   var svg=document.getElementById('beads'), circles=[];
   function draw(){
-    var html='', cx=200, cy=150, R=120, total=55, k=0;
-    var pos=[];
-    /* colgante */
-    pos.push([cx,370]); pos.push([cx,338]); pos.push([cx,312]); pos.push([cx,292]); pos.push([cx,272]);
-    for(var i=0;i<total;i++){var ang=Math.PI/2+ (i+0.5)*(2*Math.PI/(total+1)); pos.push([cx+R*Math.cos(ang), cy+R*Math.sin(ang)])}
-    html+='<path d="M200 270 L200 362" class="cord"/><circle cx="200" cy="150" r="120" class="cord"/>';
-    html+='<g class="cross"><path d="M200 380 v34 M188 392 h24"/></g>';
-    pos.forEach(function(p,i){ var big=(i===0||i===1||(i>=5 && (i-5)%11===0)); html+='<circle data-b="'+i+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+(big?7.5:5)+'" class="bd'+(big?' big':'')+'"/>'});
+    /* rosario: cruz (b0), cuenta grande (b1), 3 pequeñas (b2-4), medalla (b-2) y anillo de 5 décadas (b5…b59) */
+    var cx=200, cy=148, R=122, html='', my=cy+R+10;
+    /* anillo: cada década = 1 cuenta grande + 10 pequeñas; hueco en la medalla */
+    var w=[];for(var d=0;d<5;d++){w.push(1.9);for(var a=0;a<10;a++)w.push(1)}
+    var gap=0.17, span=2*Math.PI-2*gap, tot=0;w.forEach(function(x){tot+=x});tot+=0.6;
+    var acc=0.3, ring=[];
+    /* empieza a la derecha de la medalla y gira en sentido antihorario visual (hacia arriba por la derecha) */
+    w.forEach(function(x){acc+=x/2;var t=Math.PI/2-gap-(acc/tot)*span;ring.push([cx+R*Math.cos(t),cy+R*Math.sin(t)]);acc+=x/2});
+    var pd=[[cx,my+86],[cx,my+64],[cx,my+46],[cx,my+28]]; /* b1 grande, b2-4 */
+    html+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" class="cord"/>';
+    html+='<path d="M'+cx+' '+(my+6)+' V'+(my+100)+'" class="cord"/>';
+    /* medalla */
+    html+='<path data-b="-2" class="bd md" d="M'+cx+' '+(my-12)+' C'+(cx+11)+' '+(my-12)+' '+(cx+12)+' '+(my+2)+' '+cx+' '+(my+12)+' C'+(cx-12)+' '+(my+2)+' '+(cx-11)+' '+(my-12)+' '+cx+' '+(my-12)+' Z"/>';
+    /* cruz */
+    var ty=my+104;
+    html+='<path data-b="0" class="bd xc" d="M'+(cx-3.2)+' '+ty+' h6.4 v11 h10 v6.4 h-10 v26 h-6.4 v-26 h-10 v-6.4 h10 z"/>';
+    pd.forEach(function(p,k){var b=k+1,big=b===1;html+='<circle data-b="'+b+'" cx="'+p[0]+'" cy="'+p[1]+'" r="'+(big?7.5:5.2)+'" class="bd'+(big?' big':'')+'"/>'});
+    ring.forEach(function(p,k){var b=k+5,big=k%11===0;html+='<circle data-b="'+b+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+(big?7.5:5.2)+'" class="bd'+(big?' big':'')+'"/>'});
+    svg.setAttribute('viewBox','0 0 400 '+(ty+52));
     svg.innerHTML=html; circles=[].slice.call(svg.querySelectorAll('.bd'));
   }
   function render(){
@@ -214,7 +225,7 @@ if(rb){
     document.getElementById('r-sub').textContent=sub;
     document.getElementById('r-prog').style.width=((idx+1)/steps.length*100)+'%';
     document.getElementById('r-count').textContent=(idx+1)+' / '+steps.length;
-    var active=s.b; if(s.p==='misterio') active=s.b;
+    var active=s.b; if(active===-3) active=-2;
     circles.forEach(function(c){var b=+c.dataset.b; c.classList.toggle('on',b===active); c.classList.toggle('done', stepsBeadDone(b))});
     document.getElementById('r-prev').disabled=idx===0;
     document.getElementById('r-next').textContent= idx===steps.length-1 ? (l==='en'?'Start again':'Volver a empezar') : (l==='en'?'Next →':'Siguiente →');

@@ -237,6 +237,10 @@ footer i{font-family:var(--display);font-size:16px}
 #beads .bd.done{fill:var(--accent);stroke:var(--accent);opacity:.45}
 #beads .bd.on{fill:var(--accent);stroke:var(--accent);opacity:1;r:9}
 #beads .bd.big.on{r:11}
+#beads .xc,#beads .md{stroke-linejoin:round}
+#beads .xc.on,#beads .md.on{fill:var(--accent);stroke:var(--accent);opacity:1}
+#beads .bd{transform-box:fill-box;transform-origin:center}
+#beads .md.on,#beads .xc.on{transform:scale(1.15)}
 .r-panel{min-width:0}
 .r-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
 .r-head span+span{color:var(--muted)}
@@ -266,3 +270,4 @@ footer .wrap{align-items:center}
 .tiempo{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .tiempo i{width:10px;height:10px;border-radius:50%;display:inline-block;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
 @media (max-width:900px){.rosario{grid-template-columns:1fr;padding:24px}#beads{max-width:300px;margin:0 auto}.x-list{grid-template-columns:1fr}}
+@media (max-width:600px){.o .r-head span+span::before{display:none}.o .r-head{flex-direction:column;align-items:flex-start;gap:2px}}
