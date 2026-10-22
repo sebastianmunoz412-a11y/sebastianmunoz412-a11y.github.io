@@ -206,3 +206,4 @@ footer i{font-family:var(--display);font-size:16px}
 .hero p{animation-delay:.12s}.hero .ctas{animation-delay:.22s}.portrait{animation-delay:.3s}
 @keyframes heroIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.hero h1,.hero p,.hero .ctas,.portrait{animation:none}}
+.sd-pill[hidden]{display:none!important}
